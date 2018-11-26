@@ -1,5 +1,4 @@
-require 'net/http'
-require 'json'
+require 'open-uri'
 
 class GamesController < ApplicationController
   def new
@@ -18,10 +17,7 @@ class GamesController < ApplicationController
         return score = 222
       end
       url = "https://wagon-dictionary.herokuapp.com/#{answer.join}"
-      uri = URI(url)
-      response = Net::HTTP.get(uri)
-      found = JSON.parse(response)["found"]
-
+      found = JSON.parse(open(url).read)["found"]
     end
 
 
